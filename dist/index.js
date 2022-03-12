@@ -7,14 +7,23 @@ if (require('electron-squirrel-startup')) {
     // eslint-disable-line global-require
     electron_1.app.quit();
 }
+var SCREEN_PADDING = 24;
 var createWindow = function () {
     // Create the browser window.
     var mainWindow = new electron_1.BrowserWindow({
         height: 450,
-        width: 550
+        width: 550,
+        alwaysOnTop: true,
+        transparent: true,
+        frame: false,
+        maximizable: false,
+        titleBarStyle: 'customButtonsOnHover'
     });
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, '../src/index.html'));
+    mainWindow.setAlwaysOnTop(true);
+    mainWindow.setMaximizable(false);
+    mainWindow.setVisibleOnAllWorkspaces(true);
 };
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

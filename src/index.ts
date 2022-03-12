@@ -12,10 +12,19 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 450,
     width: 550,
+    alwaysOnTop: true,
+    transparent: true,
+    frame: false,
+    maximizable: false,
+    titleBarStyle: 'customButtonsOnHover',
   });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, '../src/index.html'));
+
+  mainWindow.setAlwaysOnTop(true)
+  mainWindow.setVisibleOnAllWorkspaces(true)
+
 };
 
 // This method will be called when Electron has finished
