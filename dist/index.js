@@ -10,13 +10,11 @@ if (require('electron-squirrel-startup')) {
 var createWindow = function () {
     // Create the browser window.
     var mainWindow = new electron_1.BrowserWindow({
-        height: 600,
-        width: 800
+        height: 450,
+        width: 550
     });
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, '../src/index.html'));
-    // Open the DevTools.
-    mainWindow.webContents.openDevTools();
 };
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
