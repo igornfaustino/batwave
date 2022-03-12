@@ -1,5 +1,6 @@
 "use strict";
 exports.__esModule = true;
+var child_process_1 = require("child_process");
 var electron_1 = require("electron");
 var path = require("path");
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -7,7 +8,6 @@ if (require('electron-squirrel-startup')) {
     // eslint-disable-line global-require
     electron_1.app.quit();
 }
-var SCREEN_PADDING = 24;
 var createWindow = function () {
     // Create the browser window.
     var mainWindow = new electron_1.BrowserWindow({
@@ -22,13 +22,16 @@ var createWindow = function () {
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, '../src/index.html'));
     mainWindow.setAlwaysOnTop(true);
-    mainWindow.setMaximizable(false);
     mainWindow.setVisibleOnAllWorkspaces(true);
 };
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 electron_1.app.on('ready', createWindow);
+var sound;
+electron_1.app.on('browser-window-created', function () {
+    sound = (0, child_process_1.exec)("mpg123 --loop -1 ./batwave.mp3");
+});
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -36,6 +39,9 @@ electron_1.app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
         electron_1.app.quit();
     }
+});
+electron_1.app.on('before-quit', function () {
+    sound.kill();
 });
 electron_1.app.on('activate', function () {
     // On OS X it's common to re-create a window in the app when the
