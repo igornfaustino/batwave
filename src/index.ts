@@ -17,7 +17,10 @@ const createWindow = (): void => {
     frame: false,
     maximizable: false,
     titleBarStyle: 'customButtonsOnHover',
+    icon: path.resolve(__dirname, '../public/assets/icon.png')
   });
+
+  console.log(__dirname)
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, '../public/index.html'));
