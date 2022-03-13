@@ -1,4 +1,3 @@
-import { ChildProcess, exec } from "child_process";
 import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 
@@ -21,7 +20,7 @@ const createWindow = (): void => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, '../src/index.html'));
+  mainWindow.loadFile(path.join(__dirname, '../public/index.html'));
 
   mainWindow.setAlwaysOnTop(true)
   mainWindow.setVisibleOnAllWorkspaces(true)
@@ -33,11 +32,6 @@ const createWindow = (): void => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
-let sound: ChildProcess
-
-app.on('browser-window-created', () => {
-  sound = exec("mpg123 --loop -1 ./batwave.mp3")
-})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -47,10 +41,6 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
-app.on('before-quit', () => {
-  sound.kill()
-})
 
 app.on('activate', () => {
   // On OS X it's common to re-create a window in the app when the
