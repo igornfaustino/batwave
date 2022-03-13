@@ -2,7 +2,7 @@
   "name": "batwave",
   "productName": "batwave",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "batwave signal from the batman",
   "main": "dist/index.js",
   "scripts": {
     "start": "tsc && electron-forge start",
